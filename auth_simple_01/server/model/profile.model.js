@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const profileSchema = new mongoose.Schema({
     address:{
         type:String,
-        default:"",
+        default:"abcd",
     },
     user:{
         type:mongoose.Schema.Types.ObjectId,

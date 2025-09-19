@@ -1,0 +1,4 @@
+.env
+node_module
+// it is important for not pushing data into github 
+// it consist more and more file which can create by different tools

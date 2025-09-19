@@ -15,7 +15,7 @@ export const registerUser = async(req, res)=>{
         const existUser = await User.findOne({email})
         if(existUser.email===email){
             return res.status(400).json({
-                succuss:false,
+                success:false,
                 message:"User All Ready Exist"
             })
         }
@@ -32,13 +32,13 @@ export const registerUser = async(req, res)=>{
         await User.create({name, email,  password:hashPassword,gender})
 
         res.status(200).json({
-            succuss:true,
+            success:true,
             message:"User Registered"
         })
     }catch(e){
         console.log("Error ho gya")
        return res.status(500).json({
-            succuss:false,
+            success:false,
             message:"Check Internal Server"
         })
     }
@@ -49,7 +49,7 @@ export const login = async (req, res)=>{
         console.log("Email : ", email,  "Password : ", password);
         if(!email || !password){
             return res.status(400).json({
-                succuss:false,
+                success:false,
                 message:"Fill all Field"
             })
         }
@@ -63,13 +63,13 @@ export const login = async (req, res)=>{
             })
         }else {
             return res.status(401).json({
-                succuss:false,
+                success:false,
                 message:"Invalid Password"
             })
         }
     }catch(e){
         return res.status.json({
-            succuss:false,
+            success:false,
             message:"Internal Error"
         })
     }
