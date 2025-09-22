@@ -22,6 +22,11 @@ const userSchema = new mongoose.Schema({
     },
     confirmPassword:{
         type:String,
+    }, 
+    role:{
+        type:String,
+        required:true,
+        enum:["Admin", "User"],
     }
 })
 

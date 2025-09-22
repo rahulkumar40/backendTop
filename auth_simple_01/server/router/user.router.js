@@ -1,10 +1,17 @@
 import express from 'express'
-import {registerUser, login} from '../controller/user.controller.js';
+import {registerUser, login,getSingleUser,getAllUser,logout} from '../controller/user.controller.js';
+
 import profile from '../controller/profile.controller.js';
+import { auth,isUser ,isAdmin} from '../middlewares/auth.middlewares.js';
+import { uplaod } from '../middlewares/multer.middlerware.js';
 const router = express.Router();
 
 router.post('/registere', registerUser);
 router.post('/login',login);
-router.post('/profiles', profile);
+router.get('/singleUser',auth,isUser,getSingleUser);             
+router.get('/getAllUser',auth,isAdmin,getAllUser);             
+router.post('/profiles',uplaod.single('image'),  profile);
+router.post('/logout',logout)
+
 
 export default router;

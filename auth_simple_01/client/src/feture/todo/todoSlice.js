@@ -3,7 +3,6 @@ import { createSlice,nonoid } from "@reduxjs/toolkit";
 
 const initialState = {
     todos:[{id:1, text:"Hello word"},],
-
 }
 
 function sayHello(){
@@ -27,7 +26,7 @@ export const todoSlice = createSlice({
             state.todos.push(todo);
         },
         removeTodo:(state, action)=>{
-            state.todos = state.todos.filter((e)=>todo.id!==action.payload);
+            state.todos = state.todos.filter((todo)=>todo.id!==action.payload);
         }
     }
 })
