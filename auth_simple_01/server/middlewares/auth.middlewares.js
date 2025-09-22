@@ -14,6 +14,7 @@ export const auth = async(req, res, next)=>{
                 message:"Token Expired  "
             })
         }
+    
         
         const decode =  jwt.verify(token, process.env.JWT_SECRET_KEY);
         console.log("decode : ", decode)
