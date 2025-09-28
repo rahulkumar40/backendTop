@@ -17,7 +17,6 @@
 //         res.status(200).json({
 //             message:"ho gyaa"
 //         })
-
 //     }catch(e){
 //         console.log("Error profile Controller")
 //         return res.status(500).json({
@@ -30,34 +29,41 @@
 // export default profile;
 import { Profile } from "../model/profile.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
-
+import { User } from "../model/user.model.js";
 const profile = async (req, res) => {
   try {
-    const { address } = req.body;
+    const { address, bio, about,socialMedia, } = req.body;
 
     // If no file uploaded
-    if (!req.file) {
-      return res.status(400).json({
-        success: false,
-        message: "Image file is required",
-      });
+    // 2. Handle image upload (unchanged)
+    let imageUrl = null;
+    if (req.file) {
+      const uploadedImage = await uploadOnCloudinary(req.file.path);
+      imageUrl = uploadedImage.url;
     }
-
-    const uploadedImage = await uploadOnCloudinary(req.file.path);
-
+    
     // Create profile in DB
-    const ans = await Profile.create({
+    const userId = req.id;
+
+    console.log(userId);
+    const data = await Profile.create( {
       address,
-      image: uploadedImage.url, // save Cloudinary URL
-      user: req.user?.id, // if you have user from auth middleware
+      image: imageUrl, // save Cloudinary URL
+      bio,
+      about,
+      socialMedia ,
     });
 
-    console.log("Profile saved:", ans);
+    console.log("Profile saved:", data);
 
+    const prouser = await User.findById(userId).populate("profile");
+
+    
+    console.log(prouser)
     return res.status(201).json({
       success: true,
       message: "Profile created successfully",
-      data: ans,
+      data
     });
   } catch (e) {
     console.error("Error in profile controller:", e.message);

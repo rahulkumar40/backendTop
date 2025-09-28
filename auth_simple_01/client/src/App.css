@@ -1,0 +1,20 @@
+/* <div class=""></div> */
+
+.spinner {
+   width: 106px;
+   height: 106px;
+   --c: radial-gradient(farthest-side,#474bff 92%,#0000);
+   background: var(--c) 50% 0,
+          var(--c) 50% 100%,
+          var(--c) 100% 50%,
+          var(--c) 0    50%;
+   background-size: 23.4px 23.4px;
+   background-repeat: no-repeat;
+   animation: spinner-kh173p 1s infinite;
+}
+
+@keyframes spinner-kh173p {
+   to {
+      transform: rotate(.5turn);
+   }
+}

@@ -10,9 +10,10 @@ router.post('/registere', registerUser);
 router.post('/login',login);
 router.get('/singleUser',auth,isUser,getSingleUser);             
 router.get('/getAllUser',auth,isAdmin,getAllUser);             
-router.post('/profiles',uplaod.single('image'),  profile);
+router.post('/profiles',auth, uplaod.single('image'),  profile);
 router.post('/logout',logout)
 router.delete('/deleteSingleUser',deleteSingleUser);
+
 router.put('/changePassword',auth, changePassword);
 
 router.post('/forgetPassword', forgetPassword);

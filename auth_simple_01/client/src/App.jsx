@@ -1,56 +1,76 @@
-import React, { useContext } from "react";
-import { AppContext } from "./contex/AppContext";
+import React, { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./index.css";
-import { NavLink } from "react-router-dom";
-// import Home from './pages/Home.jsx'
+import "./App.css";
 
-import { lazy, Suspense } from "react";
+import Navbar from "./component/Navbar";
+import About from "./pages/About";
+import Signup from "./pages/formPage/Signup";
+import CardPage from "./pages/CardPage";
+import Login from "./pages/formPage/Login";
+import ForgotPassword from "./pages/formPage/ForgotPassword";
+import ChangePassword from "./pages/formPage/ChangePassword";
+import UserProfileDashboard from "./pages/UserProfileDashboard";
+import BlogPage from "./pages/BlogPage";
+import DotGrid from "./component/gsapA/DotGrid";
+import VerificationOTP from "./pages/formPage/VarificationOTP";
+import ResetPassword from "./pages/formPage/ResetPassword";
+import UserBlog from "./pages/UserBlog";
 
 const Home = lazy(() => import("./pages/Home"));
-// const About = lazy(() => import("./About"));
+
 function App() {
-  const { color, setColor } = useContext(AppContext);
-  console.log(color);
-  const dk = color ? `dardMode` : `lightMode`;
   return (
-    <div>
-      React Redux tolkit (RTK)
-      <div className={dk}>
-        <button onClick={() => setColor(!color)}>
-          {color ? "Dark Mode" : "Light Mode"}
-        </button>
-        <div style={{ display: "flex", margin: "5px" }}>
-          <NavLink to="/home">Home</NavLink>
-          <NavLink to="/go">Go</NavLink>
-        </div>
-        <div className={dk}>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam
-          quidem voluptate nesciunt quasi sed hic illum. Maiores, obcaecati quae
-          ipsam illum mollitia saepe id aspernatur, sit unde odit voluptatibus,
-          adipisci nisi provident possimus eligendi quas suscipit aperiam animi
-          tempore sunt nobis. Labore illo aliquid corrupti reprehenderit
-          sapiente sit dolorem fugiat! Fugit, esse quis! Eius odio, non
-          quibusdam quis cupiditate dolore tempora facere architecto? Deleniti
-          saepe quod, neque provident, fugit ut amet distinctio error mollitia
-          totam, iure omnis blanditiis? Optio nobis laboriosam eveniet suscipit
-          odit ipsum a officiis quidem facilis delectus, ea ducimus dolore quam
-          autem, ab vitae quas? Minus, hic?
-        </div>
-      </div>
-      <div>
+    <>
+      {/* Background only (behind all content) */}
+      {/* <div className="fixed inset-0 -z-10 bg-black">
+        <DotGrid
+          dotSize={10}
+          gap={15}
+          baseColor="black"
+          activeColor="blue"
+          proximity={120}
+          shockRadius={250}
+          shockStrength={5}
+          resistance={750}
+          returnDuration={1.5}
+        />
+      </div> */}
+
+      {/* Main App Content */}
+      <Navbar />
+      <div className="mt-[4.2rem]">
         <Routes>
           <Route
-            path="/home"
+            path="/"
             element={
-              <Suspense fallback={<h1>Loading...</h1>}>
+              <Suspense
+                fallback={
+                  <div className="flex justify-center items-center h-screen w-full">
+                    <div className="spinner"></div>
+                  </div>
+                }
+              >
                 <Home />
               </Suspense>
             }
           />
+          <Route path="/about" element={<About />} />
+          <Route path="/card" element={<CardPage />} />
+          <Route path="/blogPage" element={<BlogPage />} />
+          <Route path="/userBlog" element={<UserBlog />} />
+          <Route path="/profile" element={<UserProfileDashboard />} />
+
+          {/* Form Pages */}
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
+          <Route path="/changePassword" element={<ChangePassword />} />
+          <Route path="/varifyOTP" element={<VerificationOTP />} />
+          <Route path="/resetPassword" element={<ResetPassword />} />
         </Routes>
       </div>
-    </div>
+    </>
   );
 }
 

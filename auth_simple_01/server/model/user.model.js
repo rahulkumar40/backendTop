@@ -9,24 +9,33 @@ const userSchema = new mongoose.Schema({
     email:{
         type:String,
         required:true,
+        unique:true,
         lowercase:true,
     },
     gender:{
         type:String,
-        enum:["MALE", "FEMELE", "OTHER"],
+        enum:["MALE", "FEMALE", "OTHER"],
         required:true
     },
     password:{
         type:String,
         required:true,
     },
-    confirmPassword:{
-        type:String,
-    }, 
+    profile:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Profile",
+        // required:false,
+        // unique:true,
+    },
+    blog:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Blog",
+    }],
     role:{
         type:String,
         required:true,
         enum:["Admin", "User"],
+        default:"User"
     }
 })
 

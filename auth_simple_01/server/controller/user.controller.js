@@ -51,7 +51,7 @@ export const registerUser = async(req, res)=>{
     }
 }
 export const login = async (req, res)=>{
-    console.log("login User : ", req.body)
+    // console.log("login User : ", req.body)
     try{
         const {email, password, role} = req.body;
         console.log("Email : ", email,  "Password : ", password);
@@ -68,7 +68,7 @@ export const login = async (req, res)=>{
                 message:"User don't Exist || Register First"
             })
         }
-        console.log(realUser)
+        // console.log(realUser)
         if(role!==realUser.role){
             return res.status(401).json({
                 success:false,
@@ -83,11 +83,11 @@ export const login = async (req, res)=>{
                 message:"Invalid Password"
             })
         }
-        console.log(realUser , "me hu e")
+        // console.log(realUser , "me hu e")
 
-        console.log(jwt)
-        console.log("key nhi cal raha hai")
-        console.log("Secret key ", process.env.JWT_SECRET_KEY)
+        // console.log(jwt)
+        // console.log("key nhi cal raha hai")
+        // console.log("Secret key ", process.env.JWT_SECRET_KEY)
         // here direct passing data give me error like
         // jwt.sign(realUser, process.env.SECRETKey, {time}) ==> bed practice 
         const token =  jwt.sign({_id:realUser._id, role:realUser.role,email:realUser.email}, process.env.JWT_SECRET_KEY, { expiresIn: '1h' })
@@ -136,7 +136,7 @@ export const getSingleUser = async(req, res)=>{
 }
 export const getAllUser = async(req, res)=>{
     try{
-        const user = await User.find();
+        const user = await User.find().populate('profile');
         if(!user){
             return res.status(400).json({
                 success:false,

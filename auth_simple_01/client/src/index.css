@@ -1,6 +1,8 @@
-*{
+@import "tailwindcss";
+/* *{
     background-color: gray;
-}
+} */
+
 .dardMode{
     color: white;
     background-color: green;
@@ -12,3 +14,4 @@
     color: black;
     background-color: blue;
 }
+
