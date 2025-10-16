@@ -20,7 +20,7 @@ const ResetPasswordImage = () => (
 export default function ResetPassword() {
   // Consume email and otp from the Context API
   // const { authData } = useAuth();
-  const { authData } = useContext(AppContext);
+  const { authData, resetPassword } = useContext(AppContext);
 
   const { email, otp } = authData;
   //   console.log(newEmail);
@@ -49,6 +49,7 @@ export default function ResetPassword() {
           "Password reset successful!\n" +
             JSON.stringify(submissionData, null, 2)
         );
+        resetPassword(submissionData)
         console.log("Submitting:", submissionData);
         // In a real app, redirect to the login page
         // navigate('/login');

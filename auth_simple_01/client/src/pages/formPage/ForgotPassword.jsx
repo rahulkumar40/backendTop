@@ -20,7 +20,7 @@ const ForgotPasswordImage = () => (
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
-  const { authData, setAuthData } = useContext(AppContext);
+  const { authData, setAuthData, forgotPassword } = useContext(AppContext);
 
   const {
     register,
@@ -33,18 +33,19 @@ export default function ForgotPassword() {
     const updated = { ...authData, email: data.email };
     setAuthData(updated);
     // ✅ merge with context
+    console.log("Response goes ");
+    
+    forgotPassword(authData);
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     alert("Password reset link sent to:\n" + data.email);
+    //     console.log("orginal data:", data);
+    //     console.log("auth data : ", authData);
 
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        alert("Password reset link sent to:\n" + data.email);
-        console.log("orginal data:", data);
-        console.log("auth data : ", authData);
-
-        reset();
-        resolve();
-        navigate("/varifyOTP"); // ✅ only after success
-      }, 1500);
-    });
+    //     reset();
+    //     resolve();
+    //   }, 1500);
+    // });
   };
 
   return (

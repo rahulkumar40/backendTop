@@ -3,7 +3,8 @@ import { User } from "../model/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 export const postBlog = async(req, res)=>{
-        // console.log(req.body)
+        console.log(req.body)
+        console.log(req.file)
     try{
         const {title,content,like, disLike} = req.body;
         if(!title || !content){
@@ -14,12 +15,15 @@ export const postBlog = async(req, res)=>{
 
         }
         let imageUrl = null;
+        // console.log(req.file.path);
         if(req.file ){
             const uploadedImage = await uploadOnCloudinary(req.file.path);
+            console.log(uploadOnCloudinary)
          imageUrl = uploadedImage.url;
         }
         
         const userId = req.id;
+        console.log("image url : ", imageUrl)
         console.log("User Who created This ... ", userId)
         const newBlog = await Blog.create({
             title,
@@ -34,8 +38,8 @@ export const postBlog = async(req, res)=>{
         await User.findByIdAndUpdate(userId, {
             $push:{blog:newBlog._id}
         })
-        const user = await User.findById(userId).populate('user', 'name image').populate('comment', '');
-        // console.log(saveToUser)
+        // const user = await User.findById(userId).populate('User', 'name image').populate('comment', '');
+        // // console.log(saveToUser)
         res.status(200).json({
             success:true,
             message:"Blog Posted !",
@@ -51,29 +55,54 @@ export const postBlog = async(req, res)=>{
     }
 }
 
-export const getAllBlog = async(req, res)=>{
-    try{
-        const blog = await Blog.find({}).populate('Comment');
-        if(!blog){
-            return res.status(400).json({
-                success:false,
-                message:"Not Any Blog Prasent"
-            })
-        }
-        res.status(200).json({
-            success:true,
-            message:"All Blog !",
-            blog,
-            userId:req.id
-        })
-    }catch(e){
-        res.status(500).json({
-            success:false,
-            message:"Internal Server problem!",
-            error:e.message
-        })
+export const getAllBlog = async (req, res) => {
+  try {
+    const blog = await Blog.find({})
+      .populate({
+        path: 'author',
+        select: 'name role email',
+      })
+      .populate({
+        path: 'comment',
+        select: 'content user reply',
+        populate: [
+          {
+            path: 'user',
+            select: 'name role',
+          },
+          {
+            path: 'reply',
+            select: 'content user',
+            populate: {
+              path: 'user',
+              select: 'name role',
+            },
+          },
+        ],
+      });
+
+    if (!blog || blog.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'No blogs present',
+      });
     }
-}
+
+    res.status(200).json({
+      success: true,
+      message: 'All Blogs!',
+      blog,
+      userId: req.id,
+    });
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      message: 'Internal Server Problem!',
+      error: e.message,
+    });
+  }
+};
+
 // export default getAllBlog ;
 
 export const getUserBlog = async(req, res)=>{

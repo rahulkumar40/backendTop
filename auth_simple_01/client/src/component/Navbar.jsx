@@ -46,7 +46,7 @@ export default function Navbar() {
               About
             </NavLink>
             <NavLink
-              to="/blogPage"
+              to="/all-blogs"
               className={({ isActive }) =>
                 `transition py-2 px-4 rounded-md font-semibold text-lg ${
                   isActive
@@ -58,7 +58,7 @@ export default function Navbar() {
               Blog Page
             </NavLink>
             <NavLink
-              to="/profile"
+              to="/dashboard"
               className={({ isActive }) =>
                 `transition py-2 px-4 rounded-md font-semibold text-lg ${
                   isActive
@@ -109,7 +109,7 @@ export default function Navbar() {
                 Card Page
               </NavLink>
               <NavLink
-                to="/profile"
+                to="/dashboard"
                 className="py-2 px-6 text-lg font-semibold text-yellow-700 w-full text-center hover:bg-yellow-50"
               >
                 Profile

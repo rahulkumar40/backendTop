@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import s from "../../assets/signup.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { AppContext } from "../../contex/AppContext";
 // Example SVG illustration
 // Renamed to SignupVisual to reflect its new role as the visual representation
 
@@ -10,19 +11,28 @@ import { Link, NavLink } from "react-router-dom";
 // If you can't add custom config, you can remove 'animate-pulse-slow' and use standard 'animate-pulse' or nothing.
 
 export default function Signup() {
+  const { signUp, userData } = useContext(AppContext);
+  const navigate = useNavigate();
+
+  if (userData) {
+    navigate("/dashboard");
+  }
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors },
   } = useForm();
 
-  const password = watch("password", "");
+  //   const password = watch("password", "");
 
-  const onSubmit = (data) => {
-    const { confirmPassword, ...userData } = data;
-    // In a real application, you would send userData to your backend API here
-    alert("Signup successful!\n" + JSON.stringify(userData, null, 2));
+  const onSubmit = async (data) => {
+    // console.log(data);
+    console.log(data);
+    const { ...userData } = data;
+    console.log(userData);
+    signUp(userData);
+    console.log("singup page res : ");
   };
 
   return (
@@ -98,7 +108,6 @@ export default function Signup() {
                 {...register("password", {
                   required: "Password is required",
                   minLength: {
-                    value: 6,
                     message: "Password must be at least 6 characters",
                   },
                 })}
@@ -125,8 +134,6 @@ export default function Signup() {
                 type="password"
                 {...register("confirmPassword", {
                   required: "Please confirm your password",
-                  validate: (value) =>
-                    value === password || "Passwords do not match",
                 })}
                 className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
                   errors.confirmPassword
@@ -153,7 +160,7 @@ export default function Signup() {
                 <label className="flex items-center gap-2">
                   <input
                     type="radio"
-                    value="male"
+                    value="MALE"
                     {...register("gender", { required: "Gender is required" })}
                     className="accent-indigo-600"
                   />
@@ -162,7 +169,7 @@ export default function Signup() {
                 <label className="flex items-center gap-2">
                   <input
                     type="radio"
-                    value="female"
+                    value="FEMALE"
                     {...register("gender", { required: "Gender is required" })}
                     className="accent-pink-500"
                   />
@@ -171,7 +178,7 @@ export default function Signup() {
                 <label className="flex items-center gap-2">
                   <input
                     type="radio"
-                    value="other"
+                    value="OTHER"
                     {...register("gender", { required: "Gender is required" })}
                     className="accent-yellow-400"
                   />

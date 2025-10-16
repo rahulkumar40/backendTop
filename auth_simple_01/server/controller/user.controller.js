@@ -19,9 +19,9 @@ export const registerUser = async(req, res)=>{
         }
         const existUser = await User.findOne({email})
         if(existUser){
-            return res.status(400).json({
+            return res.status(409).json({
                 success:false,
-                message:"User All Ready Exist"
+                message:"User Exit || Try with Another account"
             })
         }
 
@@ -36,17 +36,17 @@ export const registerUser = async(req, res)=>{
         console.log("hash password ", hashPassword , "password", password)
 
         const newUser = await User.create({name, email,  password:hashPassword, gender, role})
-
+        console.log(newUser)
         res.status(200).json({
             success:true,
             message:"User Registered",
-            user:newUser
         })
     }catch(e){
         // console.log("Error ho gya")
        return res.status(500).json({
             success:false,
             message:"Check Internal Server",
+            error:e.message
         })
     }
 }
@@ -61,9 +61,9 @@ export const login = async (req, res)=>{
                 message:"Fill all Field"
             })
         }
-        const realUser = await User.findOne({email});
+        const realUser = await User.findOne({email}).populate('profile');
         if(!realUser){
-            return res.status(400).json({
+            return res.status(404).json({
                 success:false,
                 message:"User don't Exist || Register First"
             })
@@ -93,11 +93,11 @@ export const login = async (req, res)=>{
         const token =  jwt.sign({_id:realUser._id, role:realUser.role,email:realUser.email}, process.env.JWT_SECRET_KEY, { expiresIn: '1h' })
         // console.log("chal bahi")
         // console.log("token ", token)
-        res.status(200).cookie("token", token,  { expiresIn: "1h",}).json({
-            succuss:true,
+        res.status(200).cookie("token", token,  {expires: new Date(Date.now() + 1000 * 60 * 60)}).json({
+            success:true,
             message: "Login Done !",
-            token:token,
-            user:realUser
+            user:realUser,
+            expiry: Date.now() + 1000 * 60 * 60,
         })
     }catch(e){
         return res.status(500).json({
@@ -159,7 +159,7 @@ export const getAllUser = async(req, res)=>{
 export const logout = async(req, res)=>{
 
     try{
-        const token = req.cookies.token;
+        const token = req.cookies.token || req.headers["authorization"]?.split(" ")[1];
         console.log(token)
     if(!token){
         return res.status(401).json({
@@ -177,8 +177,7 @@ export const logout = async(req, res)=>{
             success:false,
             message:"Server Error"
         })
-    }
-    
+    }   
 }
 
 export const deleteSingleUser = async(req, res)=>{

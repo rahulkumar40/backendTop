@@ -19,7 +19,7 @@ const VerifyOTPImage = () => (
 );
 
 export default function VerificationOTP({ userEmail }) {
-  const { setAuthData, authData } = useContext(AppContext);
+  const { setAuthData, authData, verifyPasswordOTP } = useContext(AppContext);
   const navigate = useNavigate();
 
   const {
@@ -35,7 +35,8 @@ export default function VerificationOTP({ userEmail }) {
     console.log(updateData);
     return new Promise((resolve) => {
       setTimeout(() => {
-        alert("Verifying:\n" + JSON.stringify(authData, null, 2));
+        // alert("Verifying:\n" + JSON.stringify(authData, null, 2));
+        verifyPasswordOTP(authData);
         console.log("Submitting:", { authData });
         resolve();
         navigate("/resetPassword"); // ✅ redirect after success

@@ -34,6 +34,7 @@ const profile = async (req, res) => {
   try {
     const { address, bio, about,socialMedia, } = req.body;
 
+    // console.log(address, bio, about, socialMedia);
     // If no file uploaded
     // 2. Handle image upload (unchanged)
     let imageUrl = null;
@@ -45,7 +46,7 @@ const profile = async (req, res) => {
     // Create profile in DB
     const userId = req.id;
 
-    console.log(userId);
+    // console.log(userId);
     const data = await Profile.create( {
       address,
       image: imageUrl, // save Cloudinary URL
@@ -54,19 +55,20 @@ const profile = async (req, res) => {
       socialMedia ,
     });
 
-    console.log("Profile saved:", data);
+    const newUser = await User.findByIdAndUpdate(userId, {profile:data._id});
+    // console.log("New updated User...", newUser)
+    // console.log("Profile saved:", data);
 
-    const prouser = await User.findById(userId).populate("profile");
 
-    
-    console.log(prouser)
+    // const prouser = await User.findById(userId).populate("profile");
+    // console.log(prouser)
     return res.status(201).json({
       success: true,
       message: "Profile created successfully",
       data
     });
   } catch (e) {
-    console.error("Error in profile controller:", e.message);
+    // console.error("Error in profile controller:", e.message);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error",

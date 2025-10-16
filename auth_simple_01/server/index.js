@@ -10,6 +10,7 @@ const app = express();
 const corsMiddleware = cors({
     origin:"http://localhost:5173",
     methods:["GET", "POST", "DELETE","PUT"],
+    credentials: true,
 })
 
 app.use(corsMiddleware);

@@ -6,8 +6,8 @@ import { createComment, createReplies, deleteComment } from '../controller/comme
 const blogRouter = express.Router();
 
 
-blogRouter.post('/blog',auth,uplaod.single('image') ,postBlog);
-blogRouter.get('/getAllBlogs',auth, getAllBlog)
+blogRouter.post('/create-blog',auth,uplaod.single('image') ,postBlog);
+blogRouter.get('/getAllBlogs', getAllBlog)
 blogRouter.post('/postcomment', auth, createComment );
 blogRouter.post('/commentReply', createReplies)
 blogRouter.get('/usersBLog',auth, getUserBlog)

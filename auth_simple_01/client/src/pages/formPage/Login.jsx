@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import login from "../../assets/login.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AppContext } from "../../contex/AppContext";
 // Placeholder Image Component
 
 export default function Login() {
+  const { loginFunction, userData } = useContext(AppContext);
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -16,17 +20,21 @@ export default function Login() {
       role: "User",
     },
   });
+  useEffect(() => {
+    if (userData) {
+      navigate("/");
+    }
+  });
 
   const onSubmit = (data) => {
     // Simulate an API call delay
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        alert("Login attempt with:\n" + JSON.stringify(data, null, 2));
-        resolve();
-      }, 1000);
-    });
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    loginFunction(data);
+    // resolve();
+    //   }, 1000);
+    // });
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       {/* Framer Motion Wrapper for the entire card */}
@@ -84,10 +92,6 @@ export default function Login() {
                 type="password"
                 {...register("password", {
                   required: "Password is required",
-                  minLength: {
-                    value: 6,
-                    message: "Password must be at least 6 characters",
-                  },
                 })}
                 className={`w-full px-4 py-2 border rounded-lg transition duration-200 focus:outline-none focus:ring-2 ${
                   errors.password

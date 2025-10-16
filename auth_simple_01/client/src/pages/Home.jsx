@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
 // import '../App.css'
 // Dummy data for featured posts and testimonials
@@ -54,6 +54,7 @@ const fadeIn = {
 };
 
 export default function Home() {
+  const [userData, setDoYou] = useState(false);
   const SubHeading = () => {
     return (
       <div>
@@ -127,8 +128,27 @@ export default function Home() {
       </section>
     );
   }
+
+  // future use
+  //   function DoYouWant() {
+  //     return (
+  //       <div className="h-[150px] w-[200px] relative">
+  //         <h2>Message</h2>
+  //         <p>Do you realy want to delete this message...</p>
+  //         <Link to="/about">
+  //           <button>Delete</button>
+  //         </Link>
+  //         <button
+  //           className="absolute right-0 top-0 text-[2.5rem] font-bold "
+  //           onClick={() => setDoYou(!doYou)}
+  //         >
+  //           x
+  //         </button>
+  //       </div>
+  //     );
+  //   }
   return (
-    <div className="bg-gray-50 min-h-screen flex flex-col">
+    <div className="bg-gray-50 min-h-screen flex flex-col ">
       {/* HERO SECTION */}
       <section className="pt-28 pb-16 bg-gradient-to-tr from-indigo-600 via-purple-500 to-pink-400 flex flex-col items-center relative">
         <motion.div
@@ -152,12 +172,12 @@ export default function Home() {
             From tech innovations to life lessons, medical breakthroughs to{" "}
             <br /> creative journeys—every story finds a home here.
           </p>
-          <a
-            href="/signup"
-            className="inline-block bg-yellow-400 text-indigo-800 hover:bg-yellow-300 rounded-full px-8 py-3 text-lg font-bold shadow-lg transition"
+          <Link
+            to="/signup"
+            className="inline-block bg-yellow-400 text-indigo-800 hover:bg-yellow-300 rounded-full px-8 py-3 text-lg cursor-pointer font-bold shadow-lg transition"
           >
             Start Your Journey
-          </a>
+          </Link>
         </motion.div>
         {/* Decorative Circles */}
         <motion.div
@@ -301,6 +321,26 @@ export default function Home() {
             </a>
           </div>
         </div>
+        {/* <div className="relative ">
+          <p>Try Kr Do</p>
+          {doYou ? (
+            <div className="absolute right-[50%] bottom-0 bg-gradient-to-br to-sky-400 via-orange-400 from-fuchsia-300">
+              <DoYouWant className="" />
+            </div>
+          ) : (
+            <button onClick={() => setDoYou(!doYou)}>Delete</button>
+          )}
+        </div>
+        <div className="relative ">
+          <p>Try Kr Do</p>
+          {doYou ? (
+            <div className="absolute right-[50%] bottom-0 bg-gradient-to-br to-sky-400 via-orange-400 from-fuchsia-300">
+              <DoYouWant className="" />
+            </div>
+          ) : (
+            <button onClick={() => setDoYou(!doYou)}>Delete</button>
+          )}
+        </div> */}
       </footer>
     </div>
   );

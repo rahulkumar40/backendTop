@@ -10,14 +10,20 @@ import CardPage from "./pages/CardPage";
 import Login from "./pages/formPage/Login";
 import ForgotPassword from "./pages/formPage/ForgotPassword";
 import ChangePassword from "./pages/formPage/ChangePassword";
-import UserProfileDashboard from "./pages/UserProfileDashboard";
 import BlogPage from "./pages/BlogPage";
-import DotGrid from "./component/gsapA/DotGrid";
+// import DotGrid from "./component/gsapA/DotGrid";
 import VerificationOTP from "./pages/formPage/VarificationOTP";
 import ResetPassword from "./pages/formPage/ResetPassword";
-import UserBlog from "./pages/UserBlog";
-
+import UserBlog from "./pages/dashBoard/UserBlog";
+import CreateBlogPost from "./pages/dashBoard/CreateBlogPost";
+import Profile from "./pages/dashBoard/Profile";
+import DashboardLayout from "./pages/dashBoard/DashboardLayout";
+import PageNotFound from "./pages/PageNotfound";
+import ContactPage from "./pages/ContactPage";
+import AllUserBlogs from "./pages/AllUserBlogs";
+import SingleBlog  from "./pages/dashBoard/SingleBlog";
 const Home = lazy(() => import("./pages/Home"));
+const dashBoard = lazy(() => import("./pages/dashBoard/DashboardLayout"));
 
 function App() {
   return (
@@ -58,16 +64,24 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/card" element={<CardPage />} />
           <Route path="/blogPage" element={<BlogPage />} />
-          <Route path="/userBlog" element={<UserBlog />} />
-          <Route path="/profile" element={<UserProfileDashboard />} />
-
-          {/* Form Pages */}
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
-          <Route path="/changePassword" element={<ChangePassword />} />
           <Route path="/varifyOTP" element={<VerificationOTP />} />
           <Route path="/resetPassword" element={<ResetPassword />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/all-blogs" element={<AllUserBlogs />} />
+          <Route path="/single-blog/:_id" element={<SingleBlog />} />
+          {/*Blog Related Route*/}
+          // dashboard
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<Profile />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="changePassword" element={<ChangePassword />} />
+            <Route path="My-Blogs" element={<UserBlog />} />
+            <Route path="create-blog" element={<CreateBlogPost />} />
+          </Route>
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
     </>
