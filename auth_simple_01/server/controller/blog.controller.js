@@ -33,7 +33,7 @@ export const postBlog = async(req, res)=>{
             like,
             disLike
         })
-        console.log("Blog : ", newBlog)
+        // console.log("Blog : ", newBlog)
 
         await User.findByIdAndUpdate(userId, {
             $push:{blog:newBlog._id}
@@ -132,7 +132,7 @@ const userAllBlog = await Blog.find({ author: userId })
 
 console.log(JSON.stringify(userAllBlog, null, 2));
 
-        console.log("Your All Blog ", userAllBlog);
+        // console.log("Your All Blog ", userAllBlog);
         if(!userAllBlog){
             return res.status(400).json({
                 success:false,

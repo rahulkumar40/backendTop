@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, NavLink } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
+import { AppContext } from "../contex/AppContext";
 // import '../App.css'
 // Dummy data for featured posts and testimonials
 const featuredPosts = [
@@ -54,7 +55,17 @@ const fadeIn = {
 };
 
 export default function Home() {
-  const [userData, setDoYou] = useState(false);
+  //   const [userData, setDoYou] = useState(false);
+  const { allUserBlogs, getAllBlog } = useContext(AppContext);
+
+  useEffect(() => {
+    // try {
+    getAllBlog();
+    // } catch (e) {
+    //   console.log("Error hai al");
+    // }
+  }, []);
+  console.log(allUserBlogs);
   const SubHeading = () => {
     return (
       <div>
@@ -204,29 +215,40 @@ export default function Home() {
             Featured Blogs
           </h2>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {featuredPosts.map((post, i) => (
-              <motion.a
-                href={post.link}
-                key={post.id}
-                whileHover={{ scale: 1.03 }}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col cursor-pointer hover:shadow-2xl transition"
-              >
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="w-full h-40 object-cover"
-                />
-                <div className="p-5 flex flex-col flex-1">
-                  <h3 className="font-bold text-lg text-indigo-700 mb-2">
-                    {post.title}
-                  </h3>
-                  <p className="text-gray-600 flex-1">{post.summary}</p>
-                  <span className="mt-4 inline-block text-indigo-600 font-semibold hover:underline">
-                    Read More →
-                  </span>
-                </div>
-              </motion.a>
-            ))}
+            {allUserBlogs?.blog
+              ?.slice() // clone array to avoid mutating state
+              ?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) // 🔥 latest first
+              ?.slice(0, 3)
+              .map((post, i) => (
+                <motion.a
+                  // href={post.link}
+                  key={post._id}
+                  whileHover={{ scale: 1.03 }}
+                  className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col cursor-pointer hover:shadow-2xl transition"
+                >
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-40 object-cover"
+                  />
+                  <div className="p-5 flex flex-col flex-1">
+                    <h3 className="font-bold text-lg text-indigo-700 mb-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-gray-600 flex-1">
+                      {post.content?.length > 100
+                        ? post.content.substring(0, 100) + "..."
+                        : post.content}
+                    </p>
+                    <Link
+                      to={`/single-blog/${post._id}`}
+                      className="mt-4 inline-block text-indigo-600 font-semibold hover:underline"
+                    >
+                      Read More →{" "}
+                    </Link>
+                  </div>
+                </motion.a>
+              ))}
           </div>
         </div>
       </section>

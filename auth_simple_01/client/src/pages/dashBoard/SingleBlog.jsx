@@ -10,16 +10,19 @@ import {
 } from "lucide-react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../../contex/AppContext";
+import UserBlog from "./UserBlog";
 
 const SingleBlog = () => {
   //   const { blogPost } = useContext(AppContext);
   const { _id } = useParams();
 
-  const { yourBlogs } = useContext(AppContext);
+  const { yourBlogs, allUserBlogs } = useContext(AppContext);
   console.log(_id);
 
   console.log(yourBlogs);
-  const data = yourBlogs?.find((id) => id._id == _id);
+  const data = yourBlogs
+    ? yourBlogs.find((id) => id._id == _id)
+    : allUserBlogs.blog.find((id) => id._id == _id);
   console.log(data);
   // Fallback for real context setup
 

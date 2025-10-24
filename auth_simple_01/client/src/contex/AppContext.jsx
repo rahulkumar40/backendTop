@@ -157,9 +157,9 @@ export default function ContextProvider({ children }) {
   const forgotPassword = useCallback(async (data) => {
     try {
       setLoading(true);
-      console.log("first")
+      console.log("first");
       const res = await axios.post(`${api}/forgetPassword`, data);
-      console.log("final end ")
+      console.log("final end ");
       console.log("Respose of data : ", res.config);
       navigate("/varifyOTP"); // ✅ only after success
     } catch (e) {
@@ -243,7 +243,6 @@ export default function ContextProvider({ children }) {
     () => ({
       getYourBlogs,
       getAllBlog,
-      allUserBlogs,
       emailA,
       setEmail,
       authData,
@@ -266,6 +265,7 @@ export default function ContextProvider({ children }) {
       createBlog,
       setYourBlogs,
       yourBlogs,
+      allUserBlogs
     }),
     [
       authData,
@@ -275,6 +275,7 @@ export default function ContextProvider({ children }) {
       profile,
       allUserBlogs,
       yourBlogs,
+      getAllBlog,
       // The setter functions (setEmail, setAuthData, setColor, etc.)
       // are intrinsically stable and don't strictly need to be listed.
       // The action functions (signUp, loginFunction, etc.) are stable due to useCallback.
