@@ -70,8 +70,8 @@ export default function VerificationOTP({ userEmail }) {
                 type="text"
                 {...register("otp", {
                   required: "OTP is required",
-                  minLength: { value: 6, message: "OTP must be 6 digits" },
-                  maxLength: { value: 6, message: "OTP must be 6 digits" },
+                  minLength: { value: 7, message: "OTP must be 7 digits" },
+                  maxLength: { value: 7, message: "OTP must be 7 digits" },
                   pattern: {
                     value: /^[0-9]+$/,
                     message: "Only numbers are allowed",

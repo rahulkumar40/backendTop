@@ -36,7 +36,15 @@ const userSchema = new mongoose.Schema({
         required:true,
         enum:["Admin", "User"],
         default:"User"
-    }
+    },
+    testimonialMSG :[
+        {
+           message:{
+            type:String,
+            required:true,
+           }  
+        }
+    ]
 })
 
 export const User = mongoose.model("User", userSchema);

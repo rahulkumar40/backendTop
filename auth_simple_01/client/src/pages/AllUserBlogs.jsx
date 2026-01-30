@@ -403,7 +403,7 @@ function AllUserBlogs() {
         {/* If blogs are available */}
         {allUserBlogs && allUserBlogs.blog?.length > 0 ? (
           <div className="grid gap-10">
-            {allUserBlogs.blog.map((blog, index) => (
+            {allUserBlogs.blog.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map((blog, index) => (
               <BlogCard
                 key={blog._id}
                 blog={blog}

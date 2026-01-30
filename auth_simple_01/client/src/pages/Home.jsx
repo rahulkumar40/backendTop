@@ -5,45 +5,45 @@ import { TypeAnimation } from "react-type-animation";
 import { AppContext } from "../contex/AppContext";
 // import '../App.css'
 // Dummy data for featured posts and testimonials
-const featuredPosts = [
-  {
-    id: 1,
-    title: "How to Build a MERN Blog from Scratch",
-    summary:
-      "Step-by-step guide for beginners to launch their first blog using the MERN stack.",
-    image:
-      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80",
-    link: "/blog/1",
-  },
-  {
-    id: 2,
-    title: "Tailwind CSS: Modern UI for Developers",
-    summary:
-      "Discover why Tailwind CSS is a game changer for rapid, beautiful UI design.",
-    image:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
-    link: "/blog/2",
-  },
-  {
-    id: 3,
-    title: "Mastering Framer Motion for React",
-    summary:
-      "Add stunning animations to your React apps with ease and flexibility.",
-    image:
-      "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
-    link: "/blog/3",
-  },
-];
+// const featuredPosts = [
+//   {
+//     id: 1,
+//     title: "How to Build a MERN Blog from Scratch",
+//     summary:
+//       "Step-by-step guide for beginners to launch their first blog using the MERN stack.",
+//     image:
+//       "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80",
+//     link: "/blog/1",
+//   },
+//   {
+//     id: 2,
+//     title: "Tailwind CSS: Modern UI for Developers",
+//     summary:
+//       "Discover why Tailwind CSS is a game changer for rapid, beautiful UI design.",
+//     image:
+//       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+//     link: "/blog/2",
+//   },
+//   {
+//     id: 3,
+//     title: "Mastering Framer Motion for React",
+//     summary:
+//       "Add stunning animations to your React apps with ease and flexibility.",
+//     image:
+//       "#",
+//     link: "/blog/3",
+//   },
+// ];
 
 const testimonials = [
   {
-    name: "Priya Sharma",
-    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+    name: "Ravi Yadav",
+    avatar: "#",
     text: "TopBlog is the perfect platform to share my development journey! The community is awesome and the UI is beautiful.",
   },
   {
     name: "Amit Singh",
-    avatar: "https://randomuser.me/api/portraits/men/65.jpg",
+    avatar: "#",
     text: "I learned so much from the featured blogs and connected with other devs. Superb experience!",
   },
 ];

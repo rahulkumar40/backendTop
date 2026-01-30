@@ -242,6 +242,7 @@ export const changePassword = async(req, res)=>{
 }
 
 export const forgetPassword = async(req, res)=>{
+    console.log("ander hu forget ke")
     try{
         const {email} = req.body;
         if(!email){

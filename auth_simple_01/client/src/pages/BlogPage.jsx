@@ -117,7 +117,6 @@ export default function BlogPage({ blogData = MOCK_BLOG_DATA, currentUserId = "6
     const [editingComment, setEditingComment] = useState(null); // { id: string, content: string, isReply: boolean }
 
     // --- Action Handlers (API calls would go here) ---
-
     const handleCommentSubmit = (e) => {
         e.preventDefault();
         if (!commentText.trim()) return;
@@ -163,6 +162,7 @@ export default function BlogPage({ blogData = MOCK_BLOG_DATA, currentUserId = "6
         setCommentText(`@${username} `);
     };
     
+    blogData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     return (
         <div className="min-h-screen bg-gray-100 py-10">

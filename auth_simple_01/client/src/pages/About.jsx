@@ -233,8 +233,8 @@ export default function About() {
               className="bg-white rounded-xl shadow p-6 flex flex-col items-center text-center"
             >
               <img
-                src="https://randomuser.me/api/portraits/women/44.jpg"
-                alt="Priya Sharma"
+                src="#"
+                alt="Ravi Yadav"
                 className="w-14 h-14 rounded-full border-4 border-yellow-200 mb-2"
               />
               <p className="text-gray-700 italic mb-2">
@@ -250,7 +250,7 @@ export default function About() {
               className="bg-white rounded-xl shadow p-6 flex flex-col items-center text-center"
             >
               <img
-                src="https://randomuser.me/api/portraits/men/65.jpg"
+                src="#"
                 alt="Amit Singh"
                 className="w-14 h-14 rounded-full border-4 border-green-200 mb-2"
               />
