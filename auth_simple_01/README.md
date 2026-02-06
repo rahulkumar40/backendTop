@@ -211,8 +211,8 @@ client/<br>
 
 ## 1️⃣ Clone the Repository
 
-- git clone https://github.com/your-username/blog-app.git
-  cd blog-app
+- git clone https:https://github.com/rahulkumar40/BlogApp
+- cd blog-app
 
 # 2️⃣ Backend Setup
 
