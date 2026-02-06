@@ -21,7 +21,7 @@
 
 # 🏠 Home Page
 
-![alt text](../screenshotPhoto/image.png)
+![alt text](/screenshotPhoto/image.png)
 
 > The home page provides a clean and modern interface where users can explore recent blog posts, trending content, and featured authors.<br>
 > It acts as the central hub of the platform, helping users quickly discover engaging articles.
@@ -30,7 +30,7 @@
 
 # 🔐 Login & Signup
 
-![alt text](../screenshotPhoto/image-1.png)
+![alt text](/screenshotPhoto/image-1.png)
 
 > The authentication system allows users to securely register and log in.<br>
 > It includes password hashing, JWT-based authentication, and form validation to ensure secure access and a smooth user experience.
@@ -39,7 +39,7 @@
 
 # 📝 Blog Editor
 
-![alt text](../screenshotPhoto/image-2.png)
+![alt text](/screenshotPhoto/image-2.png)
 
 ---
 
@@ -50,7 +50,7 @@
 
 📚 Blog Listing Page
 
-![alt text](../screenshotPhoto/image-3.png)
+![alt text](/screenshotPhoto/image-3.png)
 
 > The blog listing page displays all available posts in a structured layout.<br>
 > Users can browse blogs, open detailed views, like posts, and interact through comments.
@@ -303,9 +303,12 @@ client/<br>
 - Database schema design with MongoDB
 - Permission-based access control
 
+
+
 ## 👨‍💻 Author
 
 **Rahul Kumar**
 Full Stack Developer (MERN Stack)
 
 ---
+
