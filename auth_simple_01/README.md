@@ -303,20 +303,7 @@ client/<br>
 - Database schema design with MongoDB
 - Permission-based access control
 
----
 
-## 🌐 Live Demo
-
-Add your deployed project link here
-_(e.g., Vercel, Netlify, Render, Railway)_
-
----
-
-## 💻 GitHub Repository
-
-Add your repository link here
-
----
 
 ## 👨‍💻 Author
 
@@ -325,4 +312,3 @@ Full Stack Developer (MERN Stack)
 
 ---
 
-Agar chaho toh main tumhare liye **final polished complete README** bhi ek hi file me bana sakta hoon jo bas paste karte hi ready ho jaye.
