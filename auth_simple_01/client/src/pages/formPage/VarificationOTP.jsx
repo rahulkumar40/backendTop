@@ -39,7 +39,6 @@ export default function VerificationOTP({ userEmail }) {
         verifyPasswordOTP(authData);
         console.log("Submitting:", { authData });
         resolve();
-        navigate("/resetPassword"); // ✅ redirect after success
       }, 1500);
     });
   };

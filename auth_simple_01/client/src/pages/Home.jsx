@@ -220,7 +220,7 @@ export default function Home() {
               ?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) // 🔥 latest first
               ?.slice(0, 3)
               .map((post, i) => (
-                <motion.a
+                <motion.div
                   // href={post.link}
                   key={post._id}
                   whileHover={{ scale: 1.03 }}
@@ -247,7 +247,7 @@ export default function Home() {
                       Read More →{" "}
                     </Link>
                   </div>
-                </motion.a>
+                </motion.div>
               ))}
           </div>
         </div>

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
+import { AppContext } from "../contex/AppContext";
 
 export default function Navbar() {
+  const { userData } = useContext(AppContext);
   return (
     <nav className="bg-white shadow-lg fixed w-full z-50 top-0 left-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
@@ -69,12 +71,20 @@ export default function Navbar() {
             >
               Profile
             </NavLink>
+            {/* {userData ? (
+              <div className="display-none">Do it</div>
+            ) : ( */}
+            {/* <div> */}
             <NavLink
               to="/signup"
-              className="bg-yellow-400 px-5 py-2 rounded-full font-bold text-indigo-900 hover:bg-yellow-300 transition hidden md:block"
+              className={`bg-yellow-400 px-5 py-2 rounded-full font-bold text-indigo-900 hover:bg-yellow-300 transition ${
+                !userData ? "md:block" : "hidden"
+              }`}
             >
               Get Started
             </NavLink>
+            {/* </div> */}
+            {/* )} */}
           </div>
           {/* Mobile Hamburger */}
           <div className="md:hidden flex items-center">

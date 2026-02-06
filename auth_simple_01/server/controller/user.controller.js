@@ -61,15 +61,17 @@ export const login = async (req, res)=>{
                 message:"Fill all Field"
             })
         }
+
         const realUser = await User.findOne({email}).populate('profile');
+        console.log(realUser);
         if(!realUser){
             return res.status(404).json({
                 success:false,
                 message:"User don't Exist || Register First"
             })
         }
-        // console.log(realUser)
-        if(role!==realUser.role){
+        console.log(realUser)
+        if(role!==realUser.role ){
             return res.status(401).json({
                 success:false,
                 message:"Not Valid Role"
@@ -248,7 +250,7 @@ export const forgetPassword = async(req, res)=>{
         if(!email){
             return res.status(401).json({
                 success:false,
-                message:"Enter Email"
+                message:"Email Not Valid"
             })
         }
         const user = await User.findOne({email});

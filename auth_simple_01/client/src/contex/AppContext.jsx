@@ -74,6 +74,7 @@ export default function ContextProvider({ children }) {
         navigate("/login");
       } catch (e) {
         console.log("Error message : ", e.message);
+        console.log(e);
       } finally {
         setLoading(false);
       }
@@ -97,7 +98,8 @@ export default function ContextProvider({ children }) {
         console.log(res.message);
         navigate("/");
       } catch (e) {
-        console.log("Error message : ", e.message);
+        // console.log(e)
+        console.log("Error message : ", e.response.data.message);
       } finally {
         setLoading(false);
       }
@@ -163,7 +165,8 @@ export default function ContextProvider({ children }) {
       console.log("Respose of data : ", res.config);
       navigate("/varifyOTP"); // ✅ only after success
     } catch (e) {
-      console.log("Error message : ", e.message);
+      // console.log(e)
+      console.log("Error message : ", e.response.data.message);
     } finally {
       setLoading(false);
     }
@@ -174,6 +177,7 @@ export default function ContextProvider({ children }) {
       setLoading(true);
       const res = await axios.post(`${api}/handleVarifyOtp`, data);
       console.log("Respose of data : ", res);
+      navigate("/resetPassword");
     } catch (e) {
       console.log("Error message : ", e.message);
     } finally {
@@ -185,6 +189,7 @@ export default function ContextProvider({ children }) {
     try {
       setLoading(true);
       const res = await axios.post(`${api}/handleResetPassword`, data);
+        navigate("/login");
       console.log("Respose of data : ", res);
     } catch (e) {
       console.log("Error message : ", e.message);
@@ -265,7 +270,7 @@ export default function ContextProvider({ children }) {
       createBlog,
       setYourBlogs,
       yourBlogs,
-      allUserBlogs
+      allUserBlogs,
     }),
     [
       authData,
